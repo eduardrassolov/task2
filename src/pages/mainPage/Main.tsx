@@ -1,13 +1,13 @@
-import Table from "../../components/table/Table";
-import TableHeader from "../../components/table/TableHeader";
-import { mainTableHeaders } from "../../config/tableHeaders";
+import Table from "./table/Table";
+import TableHeader from "./table/TableHeader";
+import { headers } from "../../config/tableHeaders";
 
 export default function Main() {
   return (
     <>
-      <main className="w-screen h-screen overflow-scroll">
+      <main className="w-screen h-screen py-5 overflow-scroll">
         <Table>
-          <TableHeader headers={mainTableHeaders} />
+          <TableHeader headers={headers} />
         </Table>
       </main>
     </>

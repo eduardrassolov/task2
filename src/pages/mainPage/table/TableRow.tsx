@@ -3,9 +3,9 @@ import {
   PencilSquareIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { INote } from "../../interfaces/INote";
-import { getCategoryName } from "../../services/getCategoryName";
-import { parseDate } from "../../services/parseDates";
+import { INote } from "../../../interfaces/INote";
+import { getCategoryName } from "../../../services/getCategoryName";
+import { parseDate } from "../../../services/parseDates";
 
 export default function TableRow(note: INote) {
   const { name, created, category, content } = note;
@@ -22,7 +22,7 @@ export default function TableRow(note: INote) {
       {noteArr.map((item) => {
         return (
           <td key={crypto.randomUUID()} className="px-5 py-3">
-            <p>{item}</p>
+            <p className="truncate">{item}</p>
           </td>
         );
       })}
@@ -30,7 +30,7 @@ export default function TableRow(note: INote) {
         <div className="flex justify-between">
           <button>
             <PencilSquareIcon className="w-6" />
-          </button>{" "}
+          </button>
           <button>
             <ArchiveBoxArrowDownIcon className="w-6" />
           </button>
