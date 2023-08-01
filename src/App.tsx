@@ -1,11 +1,7 @@
-import Table from "./components/table/Table";
+import Main from "./pages/mainPage/Main";
 
 function App() {
-  return (
-    <>
-      <Table />
-    </>
-  );
+  return <Main />;
 }
 
 export default App;

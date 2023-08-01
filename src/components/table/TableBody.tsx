@@ -7,7 +7,6 @@ export default function TableBody() {
       {data.map((note) => {
         return <TableRow key={note.id} {...note} />;
       })}
-      <td></td>
     </tbody>
   );
 }
