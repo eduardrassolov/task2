@@ -1,5 +1,5 @@
 import { data } from "../../data/data.js";
-import TableRow from "./tableRow.js";
+import TableRow from "./TableRow.js";
 
 export default function TableBody() {
   return (
