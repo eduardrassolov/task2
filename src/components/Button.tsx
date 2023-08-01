@@ -3,14 +3,28 @@ import { ReactNode, MouseEvent } from "react";
 interface IProps {
   children: ReactNode;
   onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  variant?: string;
 }
 
-export const Button = ({ children, onClick }: IProps) => {
+type IVariants = {
+  primary: string;
+  secondary: string;
+};
+
+const variants: IVariants = {
+  primary:
+    "bg-blue-500 hover:bg-blue-700 transition duration-3 text-white font-bold py-2 px-6 text-sm rounded",
+  secondary:
+    "bg-gray-500 hover:bg-gray-700 transition duration-3 text-white font-bold py-2 px-4 text-sm rounded",
+};
+
+export const Button = ({
+  children,
+  onClick,
+}: // variant = variants.primary,
+IProps) => {
   return (
-    <button
-      className="px-4 mx-4 my-2 py-2 bg-slate-300 rounded-md"
-      onClick={onClick}
-    >
+    <button onClick={onClick} className={variants.primary}>
       {children}
     </button>
   );
