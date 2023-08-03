@@ -9,7 +9,7 @@ import { data } from "./data/data.ts";
 data.map((note) =>
   store.dispatch({ type: "notes/createNote", payload: { ...note } })
 );
-console.log(store.getState());
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>

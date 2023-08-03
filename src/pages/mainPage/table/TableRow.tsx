@@ -6,9 +6,11 @@ import {
 import { INote } from "../../../interfaces/INote";
 import { getCategoryName } from "../../../services/getCategoryName";
 import { parseDate } from "../../../services/parseDates";
+import store from "../../../redux/store";
 
 export default function TableRow(note: INote) {
-  const { name, created, category, content } = note;
+  const { id, name, created, category, content } = note;
+
   const noteArr = [
     name,
     created,
@@ -16,6 +18,9 @@ export default function TableRow(note: INote) {
     content,
     parseDate(content),
   ];
+
+  const handleDelete = (id: string) =>
+    store.dispatch({ type: "notes/deleteNoteById", payload: { id } });
 
   return (
     <tr className="overflow-hidden">
@@ -34,7 +39,7 @@ export default function TableRow(note: INote) {
           <button>
             <ArchiveBoxArrowDownIcon className="w-6" />
           </button>
-          <button>
+          <button onClick={() => handleDelete(id)}>
             <TrashIcon className="w-6" />
           </button>
         </div>
