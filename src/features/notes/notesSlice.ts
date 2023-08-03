@@ -18,7 +18,6 @@ export const noteReducer = (
           ? { ...note, ...action.payload.update }
           : note
       );
-
     case "notes/deleteNoteById":
       return state.filter((note) => note.id !== action.payload.id);
     case "notes/deleteAllNotes":
@@ -39,16 +38,16 @@ export const noteReducer = (
   }
 };
 
-export const createNote = (note: INote): AnyAction => ({
+export const createNote = (note: INote) => ({
   type: "notes/createNote",
   payload: { ...note, ...generateNote() },
 });
-export const updateNote = (id: string, note: INewNote): AnyAction => ({
+export const updateNote = (id: string, note: INewNote) => ({
   type: "notes/updateNote",
   payload: { id, update: note },
 });
 
-export const deleteNoteById = (id: string): AnyAction => ({
+export const deleteNoteById = (id: string) => ({
   type: "notes/deleteNoteById",
   payload: { id },
 });

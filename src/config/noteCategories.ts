@@ -1,12 +1,3 @@
-// export const noteCategories = new Map(
-//   Object.entries({
-//     idea: "Idea",
-//     task: "Task",
-//     random: "Random Thought",
-//     quote: "Quote",
-//   })
-// );
-
 export const categories = [
   { key: "idea", value: "Idea" },
   { key: "task", value: "Task" },
@@ -14,5 +5,6 @@ export const categories = [
   { key: "quote", value: "Quote" },
 ];
 
-export const getCategoryName = (key: string) =>
-  categories.find((category) => category.key === key)?.value;
+export const getCategoryName = (key: string): string => {
+  return categories.find((category) => category.key === key)?.value || "";
+};

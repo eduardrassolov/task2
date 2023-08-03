@@ -5,10 +5,9 @@ import "./index.css";
 import store from "./redux/store.ts";
 import { Provider } from "react-redux";
 import { data } from "./data/data.ts";
+import { createNote } from "./features/notes/notesSlice.ts";
 
-data.map((note) =>
-  store.dispatch({ type: "notes/createNote", payload: { ...note } })
-);
+data.map((note) => store.dispatch(createNote({ ...note })));
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

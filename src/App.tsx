@@ -1,9 +1,6 @@
-import Main from "./pages/mainPage/Main";
-import store from "./redux/store";
+import Main from "./pages/Main";
 
-console.log(store.getState());
 function App() {
   return <Main />;
 }
-
 export default App;

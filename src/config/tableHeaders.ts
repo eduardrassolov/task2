@@ -23,8 +23,8 @@ export const headers: Array<IHeaders> = [
   },
 ];
 
-export const statsTableHeaders: Array<string> = [
-  "Category",
-  "Archived",
-  "Active",
+export const statsHeaders: Array<IHeaders> = [
+  { name: "Category", colSize: "w-[300px]" },
+  { name: "Archived", colSize: "w-[200px]" },
+  { name: "Active", colSize: "w-[200px]" },
 ];

@@ -9,12 +9,10 @@ import { parseDate } from "../../../services/parseDates";
 import { generateDate } from "../../../services/generateDate";
 import { formatCreate } from "../../../config/timeFormat";
 import { useDispatch } from "react-redux";
-import {
-  archiveNoteById,
-  deleteNoteById,
-} from "../../../features/notes/notesSlice";
-import { openEditModal } from "../../../features/modal/modalSlice";
+import { archiveNoteById, deleteNoteById } from "../notesSlice";
+import { openEditModal } from "../../modal/modalSlice";
 import { getCategoryName } from "../../../config/noteCategories";
+
 export default function TableRow(note: INote) {
   const { id, name, created, category, content } = note;
 
@@ -26,6 +24,7 @@ export default function TableRow(note: INote) {
     parseDate(content),
   ];
 
+  console.log(note);
   // const modal = useSelector((store: IRootState) => store.modal);
   const dispatch = useDispatch();
 

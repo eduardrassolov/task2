@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Button } from "../../components/Button";
-import Overlay from "../../pages/mainPage/modal/Overlay";
-import { generateNote } from "../../services/generateNote";
-import { INote } from "../../interfaces/INote";
-import { categories } from "../../config/noteCategories";
+import { Button } from "../../../components/Button";
+import Overlay from "./Overlay";
+import { generateNote } from "../../../services/generateNote";
+import { INote } from "../../../interfaces/INote";
+import { categories } from "../../../config/noteCategories";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal } from "./modalSlice";
-import { createNote, updateNote } from "../notes/notesSlice";
-import { INewNote } from "../../interfaces/INewNote";
-import { IRootState } from "../../redux/store";
+import { closeModal } from "../modalSlice";
+import { createNote, updateNote } from "../../notes/notesSlice";
+import { INewNote } from "../../../interfaces/INewNote";
+import { IRootState } from "../../../redux/store";
 
 const defaultNote: INewNote = {
   name: "",
