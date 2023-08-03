@@ -4,7 +4,7 @@ export const data: Array<INote> = [
   {
     id: "1",
     name: "Fact",
-    created: "2021-01-01",
+    created: "2021-08-01",
     content: `On 20/07/1969 the Apollo 11 mission successfully landed humans on the Moon for the first time`,
     category: "random",
   },

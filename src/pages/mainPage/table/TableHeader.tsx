@@ -6,6 +6,11 @@ import {
 import { IHeaders } from "../../../interfaces/IHeaders";
 import store from "../../../redux/store";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+  archiveAllNotes,
+  deleteAllNotes,
+} from "../../../features/notes/notesSlice";
 
 type TableHeaderProps = {
   headers: Array<IHeaders>;
@@ -14,16 +19,13 @@ type TableHeaderProps = {
 export default function TableHeader({ headers }: TableHeaderProps) {
   const [toggleArchive, setToggle] = useState(true);
 
+  const dispatch = useDispatch();
   const handleDeleteAll = () =>
-    store.dispatch({ type: "notes/deleteAllNotes" });
-  const handleArhiveAll = () => {
+    // store.dispatch({ type: "notes/deleteAllNotes" });
+    dispatch(deleteAllNotes());
+  const handleArchiveAll = () => {
     setToggle((prev) => !prev);
-
-    console.log(toggleArchive);
-    store.dispatch({
-      type: "notes/archiveAllNotes",
-      payload: toggleArchive,
-    });
+    dispatch(archiveAllNotes(toggleArchive));
   };
 
   console.log(store.getState());
@@ -40,7 +42,7 @@ export default function TableHeader({ headers }: TableHeaderProps) {
             <button>
               <ArchiveBoxArrowDownIcon className="w-6 opacity-0 cursor-auto" />
             </button>
-            <button onClick={handleArhiveAll} className="hover:scale-[1.1]">
+            <button onClick={handleArchiveAll} className="hover:scale-[1.1]">
               {toggleArchive ? (
                 <ArchiveBoxArrowDownIcon className="w-6" />
               ) : (
