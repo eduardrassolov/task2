@@ -8,17 +8,23 @@ import { useDispatch, useSelector } from "react-redux";
 
 import TableBody from "../features/notes/table/TableBody";
 
-import TableRow1 from "../features/notes/table/TableRow1";
+import TableRow from "../features/notes/table/TableRow";
 import { generateDate } from "../services/generateDate";
 import { formatCreate } from "../config/timeFormat";
 import { parseDate } from "../services/parseDates";
-import { getCategoryName } from "../config/noteCategories";
+import {
+  categoriesNotes,
+  filterNotes,
+  getCategoryName,
+} from "../config/noteCategories";
 import { generateStats } from "../services/calcStats";
 import { openCreateModal, openEditModal } from "../features/modal/modalActions";
 import {
   archiveNoteById,
   deleteNoteById,
 } from "../features/notes/tableActions";
+import Header from "../components/Header";
+import Select from "../features/modal/modal/Select";
 
 export interface IActions {
   delete: (id: string) => void;
@@ -47,24 +53,28 @@ export default function Main() {
   return (
     <>
       <main className="w-screen h-screen py-5 overflow-scroll">
-        <div className="w-[1300px] mx-auto">
+        <div className="w-[1200px] mx-auto">
           {isModalOpen.isOpen ? <Modal /> : ""}
 
-          <Button onClick={handleOpenModal} variant="primary">
-            Add new Task
-          </Button>
-
+          <Header>Current notes: </Header>
+          <div className="flex">
+            <Select
+              selected={filterNotes[0].key}
+              options={filterNotes}
+              onChange={() => {}}
+            />{" "}
+          </div>
           <Table>
             <TableHeader headers={headers} />
             <TableBody>
               {notes.map((note) => (
-                <TableRow1
+                <TableRow
                   key={note.id}
                   id={note.id}
                   data={[
                     note.name,
                     generateDate(new Date(note.created), formatCreate),
-                    getCategoryName(note.category),
+                    getCategoryName(categoriesNotes, note.category),
                     note.content,
                     parseDate(note.content),
                   ]}
@@ -75,11 +85,18 @@ export default function Main() {
             </TableBody>
           </Table>
 
+          <div className="flex justify-end my-5">
+            <Button onClick={handleOpenModal} variant="primary">
+              Add new Task
+            </Button>
+          </div>
+
+          <Header>Summary: </Header>
           <Table>
             <TableHeader headers={statsHeaders} isMainTable={false} />
             <TableBody>
               {stats.map((stat) => (
-                <TableRow1 key={stat[0]} data={stat} />
+                <TableRow key={stat[0]} data={stat} />
               ))}
             </TableBody>
           </Table>

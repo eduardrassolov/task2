@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "../../../components/Button";
 import Overlay from "./Overlay";
 import { generateNote } from "../../../services/generateNote";
-import { categories } from "../../../config/noteCategories";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import { INewNote } from "../../../interfaces/INewNote";
@@ -13,11 +13,12 @@ import Input from "./Input";
 import Content from "./Content";
 import Footer from "./Footer";
 import Select from "./Select";
+import { categoriesNotes } from "../../../config/noteCategories";
 
 const defaultNote: INewNote = {
   name: "",
   content: "",
-  category: categories[0].key,
+  category: categoriesNotes[0].key,
 };
 
 /**
@@ -87,7 +88,15 @@ function Modal() {
           </h2>
           <Input name={note.name} onChange={handleChange} />
           <Content content={note.content} onChange={handleChange} />
-          <Select category={note.category} onChange={handleChange} />
+          <Select
+            selected={note.category}
+            options={categoriesNotes}
+            onChange={handleChange}
+          >
+            <label htmlFor="category" className="w-1/3 mb-1">
+              Category:
+            </label>
+          </Select>
           <Footer onClose={handleClose}>
             <Button type="submit" variant="primary">
               {!selectedId ? "Add" : "Save"}

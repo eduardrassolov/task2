@@ -7,15 +7,15 @@ export const headers: Array<IHeaders> = [
   },
   {
     name: "Created",
-    colSize: "w-[200px]",
+    colSize: "w-[175px]",
   },
   {
     name: "Category",
-    colSize: "w-[200px]",
+    colSize: "w-[175px]",
   },
   {
     name: "Content",
-    colSize: "w-[400px]",
+    colSize: "w-[350px]",
   },
   {
     name: "Dates",
