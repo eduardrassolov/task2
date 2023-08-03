@@ -14,8 +14,9 @@ interface INewNote {
 const defaultNote: INewNote = {
   name: "",
   content: "",
-  category: "",
+  category: "idea",
 };
+
 interface IModalProps {
   isOpen?: boolean;
   onClose: () => void;
@@ -38,6 +39,9 @@ function Modal({ isOpen = false, onClose }: IModalProps) {
   };
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+
+    if (!note.name.trim() || !note.content.trim())
+      return alert("Please fill all fields");
 
     const newNote: INote = {
       ...note,

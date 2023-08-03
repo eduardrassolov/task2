@@ -27,8 +27,7 @@ export const Button = ({
   onClick,
   type = "button",
   variant = "primary",
-}: // variant = variants.primary,
-IProps) => {
+}: IProps) => {
   return (
     <button type={type} onClick={onClick} className={variants[variant]}>
       {children}
