@@ -5,7 +5,7 @@ import "./index.css";
 import store from "./redux/store.ts";
 import { Provider } from "react-redux";
 import { data } from "./data/data.ts";
-import { createNote } from "./features/notes/notesSlice.ts";
+import { createNote } from "./features/notes/tableActions.ts";
 
 data.map((note) => store.dispatch(createNote({ ...note })));
 

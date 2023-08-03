@@ -22,22 +22,3 @@ export const modalReducer = (state = initialState, action: AnyAction) => {
       return state;
   }
 };
-
-export const openCreateModal = () => {
-  return {
-    type: "modal/openCreateModal",
-  };
-};
-export const closeModal = () => {
-  return {
-    type: "modal/closeModal",
-  };
-};
-
-export const openEditModal = (id: string) => {
-  console.log("id", id);
-  return {
-    type: "modal/openEditModal",
-    payload: { noteId: id },
-  };
-};

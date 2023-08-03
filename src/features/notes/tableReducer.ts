@@ -1,7 +1,5 @@
 import { AnyAction } from "redux";
 import { INote } from "../../interfaces/INote";
-import { generateNote } from "../../services/generateNote";
-import { INewNote } from "../../interfaces/INewNote";
 
 const initialState: Array<INote> = [];
 
@@ -37,31 +35,3 @@ export const noteReducer = (
       return state;
   }
 };
-
-export const createNote = (note: INote) => ({
-  type: "notes/createNote",
-  payload: { ...note, ...generateNote() },
-});
-export const updateNote = (id: string, note: INewNote) => ({
-  type: "notes/updateNote",
-  payload: { id, update: note },
-});
-
-export const deleteNoteById = (id: string) => ({
-  type: "notes/deleteNoteById",
-  payload: { id },
-});
-
-export const deleteAllNotes = () => ({
-  type: "notes/deleteAllNotes",
-});
-
-export const archiveNoteById = (id: string) => ({
-  type: "notes/archiveNoteById",
-  payload: { id },
-});
-
-export const archiveAllNotes = (status: boolean) => ({
-  type: "notes/archiveAllNotes",
-  payload: { status },
-});
