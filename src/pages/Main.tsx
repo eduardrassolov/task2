@@ -5,15 +5,20 @@ import Modal from "../features/modal/modal/Modal";
 import { Button } from "../components/Button";
 import { IRootState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { openCreateModal, openEditModal } from "../features/modal/modalSlice";
+
 import TableBody from "../features/notes/table/TableBody";
-import { archiveNoteById, deleteNoteById } from "../features/notes/notesSlice";
+
 import TableRow1 from "../features/notes/table/TableRow1";
 import { generateDate } from "../services/generateDate";
 import { formatCreate } from "../config/timeFormat";
 import { parseDate } from "../services/parseDates";
 import { getCategoryName } from "../config/noteCategories";
 import { generateStats } from "../services/calcStats";
+import { openCreateModal, openEditModal } from "../features/modal/modalActions";
+import {
+  archiveNoteById,
+  deleteNoteById,
+} from "../features/notes/tableActions";
 
 export interface IActions {
   delete: (id: string) => void;

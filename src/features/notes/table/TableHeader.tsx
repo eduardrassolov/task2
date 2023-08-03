@@ -5,10 +5,9 @@ import {
   ArchiveBoxXMarkIcon,
 } from "@heroicons/react/24/solid";
 import { IHeaders } from "../../../interfaces/IHeaders";
-import store from "../../../redux/store";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { archiveAllNotes, deleteAllNotes } from "../notesSlice";
+import { archiveAllNotes, deleteAllNotes } from "../tableActions";
 
 type TableHeaderProps = {
   headers: Array<IHeaders>;
