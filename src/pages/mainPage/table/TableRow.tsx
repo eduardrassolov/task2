@@ -5,40 +5,48 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { INote } from "../../../interfaces/INote";
-import { getCategoryName } from "../../../services/getCategoryName";
 import { parseDate } from "../../../services/parseDates";
-import store from "../../../redux/store";
-
+import { generateDate } from "../../../services/generateDate";
+import { formatCreate } from "../../../config/timeFormat";
+import { useDispatch } from "react-redux";
+import {
+  archiveNoteById,
+  deleteNoteById,
+} from "../../../features/notes/notesSlice";
+import { openEditModal } from "../../../features/modal/modalSlice";
+import { getCategoryName } from "../../../config/noteCategories";
 export default function TableRow(note: INote) {
   const { id, name, created, category, content } = note;
 
   const noteArr = [
     name,
-    created,
+    generateDate(new Date(created), formatCreate),
     getCategoryName(category),
     content,
     parseDate(content),
   ];
 
-  const handleDelete = (id: string) =>
-    store.dispatch({ type: "notes/deleteNoteById", payload: { id } });
-  const handleArchive = (id: string) =>
-    store.dispatch({ type: "notes/archiveNoteById", payload: { id } });
+  // const modal = useSelector((store: IRootState) => store.modal);
+  const dispatch = useDispatch();
 
-  console.log(store.getState());
+  const handleDelete = (id: string) => dispatch(deleteNoteById(id));
+  const handleArchive = (id: string) => dispatch(archiveNoteById(id));
+  const handleEdit = (id: string) => {
+    dispatch(openEditModal(id));
+  };
 
   return (
-    <tr className="overflow-hidden">
+    <tr>
       {noteArr.map((item) => {
         return (
           <td key={crypto.randomUUID()} className="px-5 py-3">
-            <p className="truncate">{item}</p>
+            <p className="overflow-scroll">{item}</p>
           </td>
         );
       })}
       <td>
         <div className="flex justify-between">
-          <button className="hover:scale-[1.1]">
+          <button className="hover:scale-[1.1]" onClick={() => handleEdit(id)}>
             <PencilSquareIcon className="w-6" />
           </button>
           <button

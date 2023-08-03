@@ -4,9 +4,10 @@ export const data: Array<INote> = [
   {
     id: "1",
     name: "Fact",
-    created: "2021-01-01",
+    created: "2021-08-01",
     content: `On 20/07/1969 the Apollo 11 mission successfully landed humans on the Moon for the first time`,
     category: "random",
+    isArchived: false,
   },
   {
     id: "2",
@@ -14,6 +15,7 @@ export const data: Array<INote> = [
     created: "2021-01-01",
     content: `"The only way to do great work is to love what you do." - Steve Jobs`,
     category: "random",
+    isArchived: false,
   },
   {
     id: "3",
@@ -21,6 +23,7 @@ export const data: Array<INote> = [
     created: "2021-01-05",
     content: `Buy milk, bread, butter, and eggs`,
     category: "task",
+    isArchived: false,
   },
   {
     id: "4",
@@ -28,6 +31,7 @@ export const data: Array<INote> = [
     created: "2021-01-05",
     content: `"Life is what happens when you're busy making other plans." - John Lennon`,
     category: "quote",
+    isArchived: false,
   },
   {
     id: "5",
@@ -35,6 +39,7 @@ export const data: Array<INote> = [
     created: "2021-01-01",
     content: `Nelson Mandela was released from prison on 11/02/1990, after 27 years of incarceration during the apartheid era in South Africa.`,
     category: "random",
+    isArchived: false,
   },
   {
     id: "6",
@@ -42,6 +47,7 @@ export const data: Array<INote> = [
     created: "2021-01-01",
     content: `"Success is not final, failure is not fatal: It is the courage to continue that counts." - Winston Churchill`,
     category: "quote",
+    isArchived: false,
   },
   {
     id: "7",
@@ -49,6 +55,7 @@ export const data: Array<INote> = [
     created: "2021-01-01",
     content: `The stock market crash of 1929, known as "Black Tuesday," occurred on 29/10/1929, triggering the Great Depression.`,
     category: "random",
+    isArchived: false,
   },
   {
     id: "8",
@@ -56,6 +63,7 @@ export const data: Array<INote> = [
     created: "2021-01-01",
     content: `A time-traveling detective solving mysteries throughout history.`,
     category: "random",
+    isArchived: false,
   },
   {
     id: "9",
@@ -63,5 +71,6 @@ export const data: Array<INote> = [
     created: "2021-01-01",
     content: `A time-traveling detective solving mysteries throughout history.`,
     category: "random",
+    isArchived: false,
   },
 ];

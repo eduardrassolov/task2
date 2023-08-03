@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { INote } from "../../../interfaces/INote.js";
+
 import TableRow from "./TableRow.js";
+import { IRootState } from "../../../redux/store.js";
 
 export default function TableBody() {
-  const notes = useSelector((store: Array<INote>) => store);
-
+  const notes = useSelector((store: IRootState) => store.notes);
   return (
     <tbody>
       {notes.map((note) => {
