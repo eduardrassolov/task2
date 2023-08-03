@@ -1,5 +1,6 @@
 import {
   ArchiveBoxArrowDownIcon,
+  ArchiveBoxXMarkIcon,
   PencilSquareIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
@@ -21,6 +22,10 @@ export default function TableRow(note: INote) {
 
   const handleDelete = (id: string) =>
     store.dispatch({ type: "notes/deleteNoteById", payload: { id } });
+  const handleArchive = (id: string) =>
+    store.dispatch({ type: "notes/archiveNoteById", payload: { id } });
+
+  console.log(store.getState());
 
   return (
     <tr className="overflow-hidden">
@@ -33,13 +38,23 @@ export default function TableRow(note: INote) {
       })}
       <td>
         <div className="flex justify-between">
-          <button>
+          <button className="hover:scale-[1.1]">
             <PencilSquareIcon className="w-6" />
           </button>
-          <button>
-            <ArchiveBoxArrowDownIcon className="w-6" />
+          <button
+            onClick={() => handleArchive(id)}
+            className="hover:scale-[1.1]"
+          >
+            {note.isArchived ? (
+              <ArchiveBoxXMarkIcon className="w-6" />
+            ) : (
+              <ArchiveBoxArrowDownIcon className="w-6" />
+            )}
           </button>
-          <button onClick={() => handleDelete(id)}>
+          <button
+            onClick={() => handleDelete(id)}
+            className="hover:scale-[1.1]"
+          >
             <TrashIcon className="w-6" />
           </button>
         </div>

@@ -13,6 +13,18 @@ export const noteReducer = (state = initialState, action: AnyAction) => {
     case "notes/deleteAllNotes":
       return initialState;
 
+    case "notes/archiveNoteById":
+      return state.map((note) =>
+        note.id === action.payload.id
+          ? { ...note, isArchived: !note.isArchived }
+          : note
+      );
+    case "notes/archiveAllNotes":
+      return state.map((note) => ({
+        ...note,
+        isArchived: action.payload,
+      }));
+
     default:
       return state;
   }
@@ -30,4 +42,14 @@ export const deleteNoteById = (id: string): AnyAction => ({
 
 export const deleteAllNotes = () => ({
   type: "notes/deleteAllNotes",
+});
+
+export const archiveNoteById = (id: string) => ({
+  type: "notes/archiveNoteById",
+  payload: id,
+});
+
+export const archiveAllNotes = (status: boolean) => ({
+  type: "notes/archiveAllNotes",
+  payload: status,
 });
