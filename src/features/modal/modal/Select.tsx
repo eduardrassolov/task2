@@ -1,24 +1,31 @@
-import React from "react";
-import { categories } from "../../../config/noteCategories";
+interface IOptions {
+  key: string;
+  value: string;
+}
 
 type SelectProps = {
-  category: string | undefined;
+  selected: string;
+  options: Array<IOptions>;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  children?: React.ReactNode;
 };
 
-export default function Select({ category, onChange }: SelectProps) {
+export default function Select({
+  selected,
+  options,
+  onChange,
+  children,
+}: SelectProps) {
   return (
     <div className="flex flex-col mb-6">
-      <label htmlFor="category" className="w-1/3 mb-1">
-        Category:
-      </label>
+      {children}
       <select
         name="category"
         className="border border-gray-400 text-base py-1 px-2 h-11 rounded-md"
         onChange={onChange}
-        value={category}
+        value={selected}
       >
-        {categories.map(({ key, value }) => (
+        {options.map(({ key, value }) => (
           <option key={key} value={key}>
             {value}
           </option>
