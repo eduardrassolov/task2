@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import TableBody from "../features/notes/table/TableBody";
 
-import TableRow1 from "../features/notes/table/TableRow1";
+import TableRow from "../features/notes/table/TableRow";
 import { generateDate } from "../services/generateDate";
 import { formatCreate } from "../config/timeFormat";
 import { parseDate } from "../services/parseDates";
@@ -19,6 +19,7 @@ import {
   archiveNoteById,
   deleteNoteById,
 } from "../features/notes/tableActions";
+import Header from "../components/Header";
 
 export interface IActions {
   delete: (id: string) => void;
@@ -54,11 +55,12 @@ export default function Main() {
             Add new Task
           </Button>
 
+          <Header>Current notes: </Header>
           <Table>
             <TableHeader headers={headers} />
             <TableBody>
               {notes.map((note) => (
-                <TableRow1
+                <TableRow
                   key={note.id}
                   id={note.id}
                   data={[
@@ -75,11 +77,12 @@ export default function Main() {
             </TableBody>
           </Table>
 
+          <Header>Summary: </Header>
           <Table>
             <TableHeader headers={statsHeaders} isMainTable={false} />
             <TableBody>
               {stats.map((stat) => (
-                <TableRow1 key={stat[0]} data={stat} />
+                <TableRow key={stat[0]} data={stat} />
               ))}
             </TableBody>
           </Table>
