@@ -5,9 +5,7 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { INote } from "../../../interfaces/INote";
-import { getCategoryName } from "../../../services/getCategoryName";
 import { parseDate } from "../../../services/parseDates";
-import store from "../../../redux/store";
 import { generateDate } from "../../../services/generateDate";
 import { formatCreate } from "../../../config/timeFormat";
 import { useDispatch } from "react-redux";
@@ -15,7 +13,8 @@ import {
   archiveNoteById,
   deleteNoteById,
 } from "../../../features/notes/notesSlice";
-
+import { openEditModal } from "../../../features/modal/modalSlice";
+import { getCategoryName } from "../../../config/noteCategories";
 export default function TableRow(note: INote) {
   const { id, name, created, category, content } = note;
 
@@ -27,12 +26,14 @@ export default function TableRow(note: INote) {
     parseDate(content),
   ];
 
+  // const modal = useSelector((store: IRootState) => store.modal);
   const dispatch = useDispatch();
 
   const handleDelete = (id: string) => dispatch(deleteNoteById(id));
   const handleArchive = (id: string) => dispatch(archiveNoteById(id));
-
-  console.log(store.getState());
+  const handleEdit = (id: string) => {
+    dispatch(openEditModal(id));
+  };
 
   return (
     <tr>
@@ -45,7 +46,7 @@ export default function TableRow(note: INote) {
       })}
       <td>
         <div className="flex justify-between">
-          <button className="hover:scale-[1.1]">
+          <button className="hover:scale-[1.1]" onClick={() => handleEdit(id)}>
             <PencilSquareIcon className="w-6" />
           </button>
           <button
