@@ -3,7 +3,6 @@ import TableHeader from "../features/notes/table/TableHeader";
 import { headers, statsHeaders } from "../config/tableHeaders";
 import Modal from "../features/modal/modal/Modal";
 import { Button } from "../components/Button";
-import { IRootState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 
 import TableBody from "../features/notes/table/TableBody";
@@ -25,6 +24,8 @@ import {
 } from "../features/notes/tableActions";
 import Header from "../components/Header";
 import Select from "../features/modal/modal/Select";
+import { useState } from "react";
+import { IRootState } from "../redux/store";
 
 export interface IActions {
   delete: (id: string) => void;
@@ -46,9 +47,21 @@ export default function Main() {
   };
 
   const handleOpenModal = () => dispatch(openCreateModal());
+  const [currentFilter, setFilter] = useState<string>(filterNotes[0].key);
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilter(() => e.target.value);
+  };
 
-  const notes = useSelector((store: IRootState) => store.notes);
-  const stats: Array<string[]> = generateStats(notes);
+  const filteredNotes = useSelector((store: IRootState) =>
+    store.notes.filter((note) => {
+      if (currentFilter === "active") return !note.isArchived;
+      else if (currentFilter === "archived") return note.isArchived;
+      return true;
+    })
+  );
+  const stats: Array<string[]> = generateStats(
+    useSelector((store: IRootState) => store.notes)
+  );
 
   return (
     <>
@@ -59,15 +72,16 @@ export default function Main() {
           <Header>Current notes: </Header>
           <div className="flex">
             <Select
-              selected={filterNotes[0].key}
+              selected={currentFilter}
               options={filterNotes}
-              onChange={() => {}}
+              onChange={handleFilterChange}
             />{" "}
           </div>
+
           <Table>
             <TableHeader headers={headers} />
             <TableBody>
-              {notes.map((note) => (
+              {filteredNotes.map((note) => (
                 <TableRow
                   key={note.id}
                   id={note.id}
@@ -87,7 +101,7 @@ export default function Main() {
 
           <div className="flex justify-end my-5">
             <Button onClick={handleOpenModal} variant="primary">
-              Add new Task
+              Add new note
             </Button>
           </div>
 
