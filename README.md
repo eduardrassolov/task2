@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# Task 2
 
 ## To run localy:
 
