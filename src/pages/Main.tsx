@@ -26,6 +26,7 @@ import Header from "../components/Header";
 import Select from "../features/modal/modal/Select";
 import { useState } from "react";
 import { IRootState } from "../redux/store";
+import { generateIcons } from "../services/generateIcons";
 
 export interface IActions {
   delete: (id: string) => void;
@@ -63,6 +64,7 @@ export default function Main() {
     useSelector((store: IRootState) => store.notes)
   );
 
+  const iconsPahts: string[] = generateIcons(filteredNotes);
   return (
     <>
       <main className="w-screen h-screen py-5 overflow-scroll">
@@ -70,6 +72,7 @@ export default function Main() {
           {isModalOpen.isOpen ? <Modal /> : ""}
 
           <Header>Current notes: </Header>
+
           <div className="flex">
             <Select
               selected={currentFilter}
@@ -81,7 +84,7 @@ export default function Main() {
           <Table>
             <TableHeader headers={headers} />
             <TableBody>
-              {filteredNotes.map((note) => (
+              {filteredNotes.map((note, index) => (
                 <TableRow
                   key={note.id}
                   id={note.id}
@@ -92,6 +95,7 @@ export default function Main() {
                     note.content,
                     parseDate(note.content),
                   ]}
+                  iconNote={iconsPahts[index]}
                   isArchived={note.isArchived}
                   actions={actions}
                 />
@@ -106,12 +110,19 @@ export default function Main() {
           </div>
 
           <Header>Summary: </Header>
+
           <Table>
             <TableHeader headers={statsHeaders} isMainTable={false} />
             <TableBody>
-              {stats.map((stat) => (
-                <TableRow key={stat[0]} data={stat} />
-              ))}
+              {stats.map((stat, index) => {
+                return (
+                  <TableRow
+                    key={stat[0]}
+                    data={stat}
+                    iconNote={`${categoriesNotes[index].key}.png`}
+                  />
+                );
+              })}
             </TableBody>
           </Table>
         </div>

@@ -5,6 +5,19 @@ export const categoriesNotes = [
   { key: "quote", value: "Quote" },
 ];
 
+export interface IImages {
+  idea: string;
+  task: string;
+  random: string;
+  quote: string;
+}
+export const imgPaths: IImages = {
+  idea: "public/Idea.png",
+  task: "public/Task.png",
+  random: "public/Random.png",
+  quote: "public/Quote.png",
+};
+
 export const filterNotes = [
   { key: "all", value: "Show All" },
   { key: "active", value: "Show Active" },

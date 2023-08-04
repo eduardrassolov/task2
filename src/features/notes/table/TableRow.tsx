@@ -11,20 +11,29 @@ interface ITableProps {
   data: Array<string>;
   actions?: IActions;
   isArchived?: boolean;
+  iconNote: string;
 }
 
-export default function TableRow1({
+export default function TableRow({
   id,
-  data,
   actions,
+  data,
   isArchived,
+  iconNote,
 }: ITableProps) {
   return (
     <tr>
-      {data.map((item: string) => {
+      {data.map((item: string, currCell: number) => {
         return (
           <td key={crypto.randomUUID()} className="px-5 py-2">
-            <p className="overflow-scroll">{item}</p>
+            <div className="flex items-center ">
+              {currCell === 0 ? (
+                <img src={iconNote} className="w-8 h-8 mr-2" />
+              ) : (
+                ""
+              )}
+              <p className="overflow-scroll">{item}</p>
+            </div>
           </td>
         );
       })}
