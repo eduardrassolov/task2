@@ -23,7 +23,7 @@ export default function TableRow1({
     <tr>
       {data.map((item: string) => {
         return (
-          <td key={crypto.randomUUID()} className="px-5 py-3">
+          <td key={crypto.randomUUID()} className="px-5 py-2">
             <p className="overflow-scroll">{item}</p>
           </td>
         );
