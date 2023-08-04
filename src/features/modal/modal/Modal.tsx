@@ -57,17 +57,17 @@ function Modal() {
     e.preventDefault();
 
     try {
+      if (
+        !note.name ||
+        !note.content ||
+        !note.name.trim() ||
+        !note.content.trim()
+      )
+        throw new Error("Please fill all fields");
+
       if (selectedId) {
         distpatch(updateNote(selectedId, { ...note }));
       } else {
-        if (
-          !note.name ||
-          !note.content ||
-          !note.name.trim() ||
-          !note.content.trim()
-        )
-          throw new Error("Please fill all fields");
-
         const newNote = generateNote(note);
         distpatch(createNote(newNote));
       }
