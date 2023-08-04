@@ -1,11 +1,24 @@
+import { memo } from "react";
+
 type TableCellProps = {
-  content: string;
+  item: string;
+  iconNote: string;
+  currIndex: number;
 };
 
-export default function TableCell({ content }: TableCellProps) {
+const TableCell = memo(function ({
+  item,
+  iconNote,
+  currIndex,
+}: TableCellProps) {
   return (
-    <td className="px-3 w-[250px] flex  overflow-hidden">
-      <p>{content}</p>
+    <td className="px-5 py-2">
+      <div className="flex items-center ">
+        {currIndex === 0 ? <img src={iconNote} className="w-8 h-8 mr-2" /> : ""}
+        <p className="overflow-scroll">{item}</p>
+      </div>
     </td>
   );
-}
+});
+
+export default TableCell;

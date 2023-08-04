@@ -1,6 +1,6 @@
 import { ReactNode, MouseEvent } from "react";
 
-interface IProps {
+interface IButtonProps {
   children: ReactNode;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   variant?: "primary" | "secondary" | "outline";
@@ -27,7 +27,7 @@ export const Button = ({
   onClick,
   type = "button",
   variant = "primary",
-}: IProps) => {
+}: IButtonProps) => {
   return (
     <button type={type} onClick={onClick} className={variants[variant]}>
       {children}

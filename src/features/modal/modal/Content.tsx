@@ -1,7 +1,7 @@
 import React from "react";
 
 type ContentProps = {
-  content: string | undefined;
+  content: string;
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 export default function Content({ content, onChange }: ContentProps) {

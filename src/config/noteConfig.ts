@@ -1,3 +1,5 @@
+import { IImages } from "../interfaces/IImage";
+
 export const categoriesNotes = [
   { key: "idea", value: "Idea" },
   { key: "task", value: "Task" },
@@ -5,12 +7,6 @@ export const categoriesNotes = [
   { key: "quote", value: "Quote" },
 ];
 
-export interface IImages {
-  idea: string;
-  task: string;
-  random: string;
-  quote: string;
-}
 export const imgPaths: IImages = {
   idea: "public/Idea.png",
   task: "public/Task.png",
@@ -28,7 +24,6 @@ interface ICategory {
   key: string;
   value: string;
 }
-
 export const getCategoryName = (
   list: Array<ICategory>,
   key: string

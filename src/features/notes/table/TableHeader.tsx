@@ -5,7 +5,7 @@ import {
   ArchiveBoxXMarkIcon,
 } from "@heroicons/react/24/solid";
 import { IHeaders } from "../../../interfaces/IHeaders";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { archiveAllNotes, deleteAllNotes } from "../tableActions";
 
@@ -13,8 +13,7 @@ type TableHeaderProps = {
   headers: Array<IHeaders>;
   isMainTable?: boolean;
 };
-
-export default function TableHeader({
+const TableHeader = memo(function ({
   headers,
   isMainTable = true,
 }: TableHeaderProps) {
@@ -28,10 +27,10 @@ export default function TableHeader({
   };
 
   return (
-    <thead className="bg-gray-300 text-xl font-semibold text-left">
+    <thead className="bg-[#9DB2BF] text-[#27374D] text-xl font-semibold text-left">
       <tr>
         {headers.map((header) => (
-          <th key={header.name} className={"px-5 py-3 " + header.colSize}>
+          <th key={header.name} className={"px-5 py-3  " + header.colSize}>
             {header.name}
           </th>
         ))}
@@ -60,4 +59,6 @@ export default function TableHeader({
       </tr>
     </thead>
   );
-}
+});
+
+export default TableHeader;

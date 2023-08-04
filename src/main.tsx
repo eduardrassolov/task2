@@ -7,7 +7,11 @@ import { Provider } from "react-redux";
 import { data } from "./data/data.ts";
 import { createNote } from "./features/notes/tableActions.ts";
 
-data.map((note) => store.dispatch(createNote({ ...note })));
+try {
+  data.map((note) => store.dispatch(createNote({ ...note })));
+} catch (error) {
+  alert("Cannot load data");
+}
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

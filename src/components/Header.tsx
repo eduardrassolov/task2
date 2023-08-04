@@ -1,5 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default function Header({ children }: { children: React.ReactNode }) {
+const Header = memo(function ({ children }: { children: React.ReactNode }) {
   return <p className="text-4xl text-center font-semibold mb-3">{children}</p>;
-}
+});
+
+export default Header;

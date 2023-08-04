@@ -10,12 +10,8 @@ type SelectProps = {
   children?: React.ReactNode;
 };
 
-export default function Select({
-  selected,
-  options,
-  onChange,
-  children,
-}: SelectProps) {
+const Select = ({ selected, options, onChange, children }: SelectProps) => {
+  console.log("render");
   return (
     <div className="flex flex-col mb-6">
       {children}
@@ -33,4 +29,6 @@ export default function Select({
       </select>
     </div>
   );
-}
+};
+
+export default Select;
