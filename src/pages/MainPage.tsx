@@ -1,31 +1,33 @@
-import Table from "../features/notes/table/Table";
-import TableHeader from "../features/notes/table/TableHeader";
-import { headers, statsHeaders } from "../config/tableHeaders";
-import Modal from "../features/modal/modal/Modal";
-import { Button } from "../components/Button";
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import TableBody from "../features/notes/table/TableBody";
-
-import TableRow from "../features/notes/table/TableRow";
-import { generateDate } from "../services/generateDate";
-import { formatCreate } from "../config/timeFormat";
-import { parseDate } from "../services/parseDates";
-import {
-  categoriesNotes,
-  filterNotes,
-  getCategoryName,
-} from "../config/noteCategories";
-import { generateStats } from "../services/calcStats";
-import { openCreateModal, openEditModal } from "../features/modal/modalActions";
+import { IRootState } from "../redux/store";
 import {
   archiveNoteById,
   deleteNoteById,
 } from "../features/notes/tableActions";
-import Header from "../components/Header";
+import { openCreateModal, openEditModal } from "../features/modal/modalActions";
+
+import Table from "../features/notes/table/Table.tsx";
+import TableHeader from "../features/notes/table/TableHeader.tsx";
+import TableBody from "../features/notes/table/TableBody.tsx";
+import TableRow from "../features/notes/table/TableRow";
+import Modal from "../features/modal/modal/Modal.tsx";
 import Select from "../features/modal/modal/Select";
-import { useState } from "react";
-import { IRootState } from "../redux/store";
+import Header from "../components/Header";
+import { Button } from "../components/Button.tsx";
+
+import { generateDate } from "../services/generateDate";
+import { parseDate } from "../services/parseDates";
+import { generateStats } from "../services/calcStats";
+import { generateIcons } from "../services/generateIcons";
+import { headers, statsHeaders } from "../config/tableHeaders.ts";
+import { formatCreate } from "../config/timeFormat";
+import {
+  categoriesNotes,
+  filterNotes,
+  getCategoryName,
+} from "../config/noteConfig";
 
 export interface IActions {
   delete: (id: string) => void;
@@ -59,10 +61,15 @@ export default function Main() {
       return true;
     })
   );
+
   const stats: Array<string[]> = generateStats(
     useSelector((store: IRootState) => store.notes)
   );
 
+  const iconsPahts: string[] = useMemo(
+    () => generateIcons(filteredNotes),
+    [filteredNotes]
+  );
   return (
     <>
       <main className="w-screen h-screen py-5 overflow-scroll">
@@ -70,6 +77,7 @@ export default function Main() {
           {isModalOpen.isOpen ? <Modal /> : ""}
 
           <Header>Current notes: </Header>
+
           <div className="flex">
             <Select
               selected={currentFilter}
@@ -78,10 +86,11 @@ export default function Main() {
             />{" "}
           </div>
 
+          {"Table with data"}
           <Table>
             <TableHeader headers={headers} />
             <TableBody>
-              {filteredNotes.map((note) => (
+              {filteredNotes.map((note, index) => (
                 <TableRow
                   key={note.id}
                   id={note.id}
@@ -92,6 +101,7 @@ export default function Main() {
                     note.content,
                     parseDate(note.content),
                   ]}
+                  iconNote={iconsPahts[index]}
                   isArchived={note.isArchived}
                   actions={actions}
                 />
@@ -106,12 +116,20 @@ export default function Main() {
           </div>
 
           <Header>Summary: </Header>
+
+          {"Summary table"}
           <Table>
             <TableHeader headers={statsHeaders} isMainTable={false} />
             <TableBody>
-              {stats.map((stat) => (
-                <TableRow key={stat[0]} data={stat} />
-              ))}
+              {stats.map((stat, index) => {
+                return (
+                  <TableRow
+                    key={stat[0]}
+                    data={stat}
+                    iconNote={`${categoriesNotes[index].key}.png`}
+                  />
+                );
+              })}
             </TableBody>
           </Table>
         </div>

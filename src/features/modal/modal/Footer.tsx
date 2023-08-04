@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "../../../components/Button";
 
 type FooterProps = {
@@ -6,7 +5,7 @@ type FooterProps = {
   children: React.ReactNode;
 };
 
-export default function Footer({ children, onClose }: FooterProps) {
+const Footer = ({ children, onClose }: FooterProps) => {
   return (
     <div className="flex justify-end">
       <div className="mx-2">{children}</div>
@@ -15,4 +14,6 @@ export default function Footer({ children, onClose }: FooterProps) {
       </Button>
     </div>
   );
-}
+};
+
+export default Footer;

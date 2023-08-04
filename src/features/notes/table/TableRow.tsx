@@ -4,30 +4,35 @@ import {
   PencilSquareIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { IActions } from "../../../pages/Main";
+import { IActions } from "../../../pages/MainPage";
+import { memo } from "react";
+import TableCell from "./TableCell";
 
 interface ITableProps {
   id?: string;
   data: Array<string>;
   actions?: IActions;
   isArchived?: boolean;
+  iconNote: string;
 }
 
-export default function TableRow1({
+const TableRow = memo(function ({
   id,
-  data,
   actions,
+  data,
   isArchived,
+  iconNote,
 }: ITableProps) {
   return (
-    <tr>
-      {data.map((item: string) => {
-        return (
-          <td key={crypto.randomUUID()} className="px-5 py-2">
-            <p className="overflow-scroll">{item}</p>
-          </td>
-        );
-      })}
+    <tr className="hover:bg-[#9DB2BF] transition-colors duration-200">
+      {data.map((item: string, index: number) => (
+        <TableCell
+          key={crypto.randomUUID()}
+          item={item}
+          iconNote={iconNote}
+          currIndex={index}
+        />
+      ))}
 
       {id && actions ? (
         <>
@@ -63,4 +68,6 @@ export default function TableRow1({
       )}
     </tr>
   );
-}
+});
+
+export default TableRow;
