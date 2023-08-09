@@ -14,6 +14,7 @@ interface ITableProps {
   actions?: IActions;
   isArchived?: boolean;
   iconNote: string;
+  isOdd?: boolean;
 }
 
 const TableRow = memo(function ({
@@ -22,9 +23,11 @@ const TableRow = memo(function ({
   data,
   isArchived,
   iconNote,
+  isOdd,
 }: ITableProps) {
+  const styles = `hover:bg-gray-300 border-b-2 bg-gray-${!isOdd ? 100 : 200} transition-colors duration-200`
   return (
-    <tr className="hover:bg-[#9DB2BF] transition-colors duration-200">
+    <tr className={styles}>
       {data.map((item: string, index: number) => (
         <TableCell
           key={crypto.randomUUID()}
@@ -37,7 +40,7 @@ const TableRow = memo(function ({
       {id && actions ? (
         <>
           <td>
-            <div className="flex justify-between">
+            <div className="flex justify-between pr-2">
               <button
                 className="hover:scale-[1.1]"
                 onClick={() => actions.edit(id)}

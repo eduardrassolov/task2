@@ -72,8 +72,8 @@ export default function Main() {
   );
   return (
     <>
-      <main className="w-screen h-screen py-5 overflow-scroll">
-        <div className="w-[1200px] mx-auto">
+      <main className="w-screen h-screen md:px-2 md:py-5 pt-5 pb-3 px-1 overflow-scroll">
+        <div className="mx-0 lg:mx-20">
           {isModalOpen.isOpen ? <Modal /> : ""}
 
           <Header>Current notes: </Header>
@@ -86,7 +86,7 @@ export default function Main() {
             />{" "}
           </div>
 
-          {"Table with data"}
+
           <Table>
             <TableHeader headers={headers} />
             <TableBody>
@@ -104,6 +104,7 @@ export default function Main() {
                   iconNote={iconsPahts[index]}
                   isArchived={note.isArchived}
                   actions={actions}
+                  isOdd={index % 2 === 0}
                 />
               ))}
             </TableBody>
@@ -117,7 +118,7 @@ export default function Main() {
 
           <Header>Summary: </Header>
 
-          {"Summary table"}
+
           <Table>
             <TableHeader headers={statsHeaders} isMainTable={false} />
             <TableBody>
@@ -127,6 +128,7 @@ export default function Main() {
                     key={stat[0]}
                     data={stat}
                     iconNote={`${categoriesNotes[index].key}.png`}
+                    isOdd={index % 2 === 0}
                   />
                 );
               })}
