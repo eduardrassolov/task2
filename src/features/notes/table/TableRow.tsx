@@ -25,7 +25,8 @@ const TableRow = memo(function ({
   iconNote,
   isOdd,
 }: ITableProps) {
-  const styles = `hover:bg-gray-300 border-b-2 bg-gray-${!isOdd ? 100 : 200} transition-colors duration-200`
+  const styles = `hover:bg-gray-300 border-b-2 ${!isOdd ? 'bg-gray-50' : 'bg-gray-200'} transition-colors duration-200`
+  console.log(styles);
   return (
     <tr className={styles}>
       {data.map((item: string, index: number) => (

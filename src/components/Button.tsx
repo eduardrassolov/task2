@@ -11,7 +11,7 @@ const buttonStyles: ButtonStyles = {
 
 interface IButtonProps {
   children: ReactNode;
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   variant?: "primary" | "secondary";
   type?: "button" | "submit" | "reset";
 }

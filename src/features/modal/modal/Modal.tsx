@@ -94,7 +94,7 @@ function Modal() {
             options={categoriesNotes}
             onChange={handleChange}
           >
-            <label htmlFor="category" className="w-1/3 mb-1">
+            <label htmlFor="caterrgory" className="w-1/3 mb-1">
               Category:
             </label>
           </Select>
