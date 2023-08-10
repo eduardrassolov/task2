@@ -9,7 +9,7 @@ const Footer = ({ children, onClose }: FooterProps) => {
   return (
     <div className="flex justify-end">
       <div className="mx-2">{children}</div>
-      <Button onClick={onClose} variant="outline">
+      <Button onClick={onClose} variant="secondary">
         Cancel
       </Button>
     </div>

@@ -3,23 +3,23 @@ import { IHeaders } from "../interfaces/IHeaders";
 export const headers: Array<IHeaders> = [
   {
     name: "Name",
-    colSize: "w-[150px]",
+    colSize: "w-auto",
   },
   {
     name: "Created",
-    colSize: "w-[175px]",
+    colSize: "w-auto",
   },
   {
     name: "Category",
-    colSize: "w-[175px]",
+    colSize: "w-auto",
   },
   {
     name: "Content",
-    colSize: "w-[350px]",
+    colSize: "w-auto",
   },
   {
     name: "Dates",
-    colSize: "w-[200px]",
+    colSize: "w-auto",
   },
 ];
 

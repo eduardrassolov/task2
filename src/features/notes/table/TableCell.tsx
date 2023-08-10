@@ -15,7 +15,7 @@ const TableCell = memo(function ({
     <td className="px-5 py-2">
       <div className="flex items-center ">
         {currIndex === 0 ? <img src={iconNote} className="w-8 h-8 mr-2" /> : ""}
-        <p className="overflow-scroll">{item}</p>
+        <p>{item}</p>
       </div>
     </td>
   );

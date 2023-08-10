@@ -4,8 +4,9 @@ interface ITableProps {
 
 export default function Table({ children }: ITableProps) {
   return (
-    <table className="bg-gray-200 rounded-lg whitespace-nowrap w-full table-fixed text-lg items-center border-collapse shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] ">
-      {children}
-    </table>
+    <div className="overflow-x-auto shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] md:rounded-xl rounded-none">
+      <table className="w-full text-base text-left ">
+        {children}
+      </table></div>
   );
 }

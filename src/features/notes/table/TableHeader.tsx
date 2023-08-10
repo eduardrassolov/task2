@@ -27,7 +27,7 @@ const TableHeader = memo(function ({
   };
 
   return (
-    <thead className="bg-[#9DB2BF] text-[#27374D] text-xl font-semibold text-left">
+    <thead className="bg-[#9DB2BF] text-[#27374D] text-xl font-semibold whitespace-nowrap text-left">
       <tr>
         {headers.map((header) => (
           <th key={header.name} className={"px-5 py-3  " + header.colSize}>

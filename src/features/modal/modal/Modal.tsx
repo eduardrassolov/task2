@@ -29,10 +29,10 @@ function Modal() {
     const foundeNote = state.notes.find((note) =>
       note.id === selectedId
         ? {
-            name: note.name,
-            content: note.content,
-            categories: note.category,
-          }
+          name: note.name,
+          content: note.content,
+          categories: note.category,
+        }
         : ""
     );
     return foundeNote || defaultNote;
@@ -82,7 +82,7 @@ function Modal() {
     <>
       <Overlay />
 
-      <div className="absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 rounded-lg -translate-y-1/2 px-5 py-8 bg-white w-[400px] ">
+      <div className="absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 sm:rounded-lg -translate-y-1/2 px-5 py-8 bg-white w-full sm:w-[500px]">
         <form onSubmit={handleSubmit}>
           <h2 className="text-2xl font-semibold mb-8">
             {!selectedId ? "New note:" : "Edit note:"}
@@ -94,7 +94,7 @@ function Modal() {
             options={categoriesNotes}
             onChange={handleChange}
           >
-            <label htmlFor="category" className="w-1/3 mb-1">
+            <label htmlFor="caterrgory" className="w-1/3 mb-1">
               Category:
             </label>
           </Select>
