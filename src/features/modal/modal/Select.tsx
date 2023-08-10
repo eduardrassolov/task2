@@ -1,3 +1,4 @@
+import React from "react";
 interface IOptions {
   key: string;
   value: string;
@@ -11,7 +12,6 @@ type SelectProps = {
 };
 
 const Select = ({ selected, options, onChange, children }: SelectProps) => {
-  console.log("render");
   return (
     <div className="flex flex-col mb-6">
       {children}

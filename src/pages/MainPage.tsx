@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import React from "react";
 import { IRootState } from "../redux/store";
 import {
   archiveNoteById,
@@ -17,17 +17,20 @@ import Select from "../features/modal/modal/Select";
 import Header from "../components/Header";
 import { Button } from "../components/Button.tsx";
 
-import { generateDate } from "../services/generateDate";
-import { parseDate } from "../services/parseDates";
 import { generateStats } from "../services/calcStats";
 import { generateIcons } from "../services/generateIcons";
 import { headers, statsHeaders } from "../config/tableHeaders.ts";
-import { formatCreate } from "../config/timeFormat";
+
 import {
   categoriesNotes,
   filterNotes,
   getCategoryName,
+
 } from "../config/noteConfig";
+import { formatCreate } from "../config/timeFormat.ts";
+import { generateDate } from "../services/generateDate.ts";
+import { parseDate } from "../services/parseDates.ts";
+import ActionsContainer from "../features/notes/table/ActionsContainer.tsx";
 
 export interface IActions {
   delete: (id: string) => void;
@@ -50,26 +53,26 @@ export default function Main() {
 
   const handleOpenModal = () => dispatch(openCreateModal());
   const [currentFilter, setFilter] = useState<string>(filterNotes[0].key);
-  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilter(() => e.target.value);
-  };
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => setFilter(() => e.target.value)
 
   const filteredNotes = useSelector((store: IRootState) =>
     store.notes.filter((note) => {
-      if (currentFilter === "active") return !note.isArchived;
-      else if (currentFilter === "archived") return note.isArchived;
+      if (currentFilter === "active") {
+        return !note.isArchived;
+      }
+
+      else if (currentFilter === "archived") {
+        return note.isArchived;
+      }
+
       return true;
     })
   );
 
-  const stats: Array<string[]> = generateStats(
-    useSelector((store: IRootState) => store.notes)
-  );
+  const stats: Array<string[]> = generateStats(useSelector((store: IRootState) => store.notes));
 
-  const iconsPahts: string[] = useMemo(
-    () => generateIcons(filteredNotes),
-    [filteredNotes]
-  );
+  const iconsPahts: string[] = useMemo(() => generateIcons(filteredNotes), [filteredNotes]);
+
   return (
     <>
       <main className="w-screen h-screen md:px-2 md:py-5 pt-5 pb-3 px-1 overflow-scroll">
@@ -83,17 +86,16 @@ export default function Main() {
               selected={currentFilter}
               options={filterNotes}
               onChange={handleFilterChange}
-            />{" "}
+            />
           </div>
 
-
+          {/* Main Table with data */}
           <Table>
             <TableHeader headers={headers} />
-            <TableBody>
+            <TableBody >
               {filteredNotes.map((note, index) => (
                 <TableRow
                   key={note.id}
-                  id={note.id}
                   data={[
                     note.name,
                     generateDate(new Date(note.created), formatCreate),
@@ -102,23 +104,25 @@ export default function Main() {
                     parseDate(note.content),
                   ]}
                   iconNote={iconsPahts[index]}
-                  isArchived={note.isArchived}
-                  actions={actions}
                   isOdd={index % 2 === 0}
-                />
+                >
+
+                  <ActionsContainer actions={actions} id={note.id} isArchived={note.isArchived} />
+
+                </TableRow>
               ))}
             </TableBody>
           </Table>
 
           <div className="flex justify-end my-5">
-            <Button onClick={handleOpenModal} variant="primary">
+            <Button onClick={handleOpenModal}>
               Add new note
             </Button>
           </div>
 
+
+          {/* Stats Table */}
           <Header>Summary: </Header>
-
-
           <Table>
             <TableHeader headers={statsHeaders} isMainTable={false} />
             <TableBody>

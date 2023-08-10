@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import React from "react";
 import {
   ArchiveBoxArrowDownIcon,
   TrashIcon,
@@ -13,10 +13,7 @@ type TableHeaderProps = {
   headers: Array<IHeaders>;
   isMainTable?: boolean;
 };
-const TableHeader = memo(function ({
-  headers,
-  isMainTable = true,
-}: TableHeaderProps) {
+const TableHeader = memo(function TableHeader({ headers, isMainTable = true }: TableHeaderProps) {
   const [toggleArchive, setToggle] = useState(true);
 
   const dispatch = useDispatch();
@@ -30,7 +27,7 @@ const TableHeader = memo(function ({
     <thead className="bg-[#9DB2BF] text-[#27374D] text-xl font-semibold whitespace-nowrap text-left">
       <tr>
         {headers.map((header) => (
-          <th key={header.name} className={"px-5 py-3  " + header.colSize}>
+          <th key={header.name} className="px-5 py-3">
             {header.name}
           </th>
         ))}

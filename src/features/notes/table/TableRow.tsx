@@ -1,32 +1,21 @@
-import {
-  ArchiveBoxArrowDownIcon,
-  ArchiveBoxXMarkIcon,
-  PencilSquareIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
-import { IActions } from "../../../pages/MainPage";
 import { memo } from "react";
 import TableCell from "./TableCell";
+import React from "react";
+import { IActions } from "../../../pages/MainPage";
 
 interface ITableProps {
-  id?: string;
   data: Array<string>;
-  actions?: IActions;
-  isArchived?: boolean;
   iconNote: string;
   isOdd?: boolean;
+  children?: React.ReactNode;
+  Component?: React.FC<IActions> | undefined
+
 }
 
-const TableRow = memo(function ({
-  id,
-  actions,
-  data,
-  isArchived,
-  iconNote,
-  isOdd,
-}: ITableProps) {
+const TableRow = memo(function TableRow({ data, iconNote, isOdd, children }: ITableProps) {
+
+
   const styles = `hover:bg-gray-300 border-b-2 ${!isOdd ? 'bg-gray-50' : 'bg-gray-200'} transition-colors duration-200`
-  console.log(styles);
   return (
     <tr className={styles}>
       {data.map((item: string, index: number) => (
@@ -38,38 +27,8 @@ const TableRow = memo(function ({
         />
       ))}
 
-      {id && actions ? (
-        <>
-          <td>
-            <div className="flex justify-between pr-2">
-              <button
-                className="hover:scale-[1.1]"
-                onClick={() => actions.edit(id)}
-              >
-                <PencilSquareIcon className="w-6" />
-              </button>
-              <button
-                onClick={() => actions.archive(id)}
-                className="hover:scale-[1.1]"
-              >
-                {isArchived ? (
-                  <ArchiveBoxXMarkIcon className="w-6" />
-                ) : (
-                  <ArchiveBoxArrowDownIcon className="w-6" />
-                )}
-              </button>
-              <button
-                onClick={() => actions.delete(id)}
-                className="hover:scale-[1.1]"
-              >
-                <TrashIcon className="w-6" />
-              </button>
-            </div>
-          </td>
-        </>
-      ) : (
-        ""
-      )}
+      {children}
+
     </tr>
   );
 });

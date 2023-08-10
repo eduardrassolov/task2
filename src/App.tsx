@@ -1,3 +1,4 @@
+import React from "react";
 import Main from "./pages/MainPage";
 
 function App() {

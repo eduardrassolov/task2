@@ -1,4 +1,4 @@
-import { memo } from "react";
+import React, { memo } from "react";
 
 type TableCellProps = {
   item: string;
@@ -6,7 +6,7 @@ type TableCellProps = {
   currIndex: number;
 };
 
-const TableCell = memo(function ({
+const TableCell = memo(function TableCell({
   item,
   iconNote,
   currIndex,

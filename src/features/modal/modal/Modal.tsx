@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import { IRootState } from "../../../redux/store.ts";
 
 import { INewNote } from "../../../interfaces/INewNote.ts";
