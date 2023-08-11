@@ -20,6 +20,9 @@ export const Default: Story = {
             { key: "random", value: "Random Thought" },
             { key: "quote", value: "Quote" },
         ],
-
-    }
+    },
+    render: (args) =>
+        <div className="w-[250px]">
+            <Select {...args} />
+        </div>
 }

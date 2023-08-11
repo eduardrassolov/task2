@@ -4,16 +4,15 @@ import {
   TrashIcon,
   ArchiveBoxXMarkIcon,
 } from "@heroicons/react/24/solid";
-import { IHeaders } from "../../../interfaces/IHeaders";
 import { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { archiveAllNotes, deleteAllNotes } from "../tableActions";
 
 type TableHeaderProps = {
-  headers: Array<IHeaders>;
-  isMainTable?: boolean;
+  headers: Array<string>;
+  showActionsBtn?: boolean;
 };
-const TableHeader = memo(function TableHeader({ headers, isMainTable = true }: TableHeaderProps) {
+const TableHeader = memo(function TableHeader({ headers, showActionsBtn = true }: TableHeaderProps) {
   const [toggleArchive, setToggle] = useState(true);
 
   const dispatch = useDispatch();
@@ -26,33 +25,34 @@ const TableHeader = memo(function TableHeader({ headers, isMainTable = true }: T
   return (
     <thead className="bg-[#9DB2BF] text-[#27374D] text-xl font-semibold whitespace-nowrap text-left">
       <tr>
-        {headers.map((header) => (
-          <th key={header.name} className="px-5 py-3">
-            {header.name}
+        {headers.map((header, index) => (
+          <th key={header + index} className="px-5 py-3">
+            {header}
           </th>
         ))}
 
-        {isMainTable ? (
-          <th className="py-3 w-[75px]">
-            <div className="flex justify-between">
-              <button>
-                <ArchiveBoxArrowDownIcon className="w-6 opacity-0 cursor-auto" />
-              </button>
-              <button onClick={handleArchiveAll} className="hover:scale-[1.1]">
-                {toggleArchive ? (
-                  <ArchiveBoxArrowDownIcon className="w-6" />
-                ) : (
-                  <ArchiveBoxXMarkIcon className="w-6" />
-                )}
-              </button>
-              <button onClick={handleDeleteAll} className="hover:scale-[1.1]">
-                <TrashIcon className="w-6" />
-              </button>
-            </div>
-          </th>
-        ) : (
-          ""
-        )}
+        {showActionsBtn ?
+          (
+            <th className="py-3 w-[75px]">
+              <div className="flex justify-between">
+                <button>
+                  <ArchiveBoxArrowDownIcon className="w-6 opacity-0 cursor-auto" />
+                </button>
+                <button onClick={handleArchiveAll} className="hover:scale-[1.1]">
+                  {toggleArchive ? (
+                    <ArchiveBoxArrowDownIcon className="w-6" />
+                  ) : (
+                    <ArchiveBoxXMarkIcon className="w-6" />
+                  )}
+                </button>
+                <button onClick={handleDeleteAll} className="hover:scale-[1.1]">
+                  <TrashIcon className="w-6" />
+                </button>
+              </div>
+            </th>
+          ) : (
+            ""
+          )}
       </tr>
     </thead>
   );

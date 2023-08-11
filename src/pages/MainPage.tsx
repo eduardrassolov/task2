@@ -120,18 +120,17 @@ export default function Main() {
             </Button>
           </div>
 
-
           {/* Stats Table */}
           <Header>Summary: </Header>
           <Table>
-            <TableHeader headers={statsHeaders} isMainTable={false} />
+            <TableHeader headers={statsHeaders} showActionsBtn={false} />
             <TableBody>
               {stats.map((stat, index) => {
                 return (
                   <TableRow
                     key={stat[0]}
                     data={stat}
-                    iconNote={`${categoriesNotes[index].key}.png`}
+                    iconNote={`/public/${categoriesNotes[index].key}.png`}
                     isOdd={index % 2 === 0}
                   />
                 );

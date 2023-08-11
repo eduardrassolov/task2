@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "../../../components/Button";
 
-type FooterProps = {
+export type FooterProps = {
   onClose: () => void;
   children: React.ReactNode;
 };
